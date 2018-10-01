@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   window.onscroll = function(){
     scrollFunction()
   };
-  document.getElementById('topButton').addEventListener('click', (e)=>{
+  document.getElementById('topButton').addEventListener('click', e =>{
     e.preventDefault();
     window.scrollTo({top: 0, behavior: 'smooth'});
   });
