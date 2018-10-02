@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-  document.querySelector('#loading').remove();
-  document.querySelector(".wait").classList.remove('wait');
+  document.querySelector('button[name="sendEmail"]').addEventListener('click', ()=>{
+    window.open('mailto:michal.kowalik.94@gmail.com');
+  });
+
   window.onscroll = function(){
     scrollFunction()
   };

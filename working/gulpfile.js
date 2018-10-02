@@ -4,8 +4,7 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var cleanCSS = require('gulp-clean-css');
-var uglify = require('gulp-uglify-es').default;
-// var uglify = require('gulp-uglify');
+var babel = require("gulp-babel");
 var concat = require('gulp-concat');
 var imagemin = require('gulp-imagemin');
 var changed = require('gulp-changed');
@@ -14,7 +13,7 @@ var htmlMin = require('gulp-htmlmin');
 var del = require('del');
 var sequence = require('run-sequence');
 var jsonminify = require('gulp-jsonminify');
-var babel = require('gulp-babel');
+var uglify = require('gulp-uglify');
 
 var config = {
   dist: 'dist/',
@@ -70,10 +69,10 @@ gulp.task('css', function() {
     .pipe(gulp.dest(config.cssout));
 });
 
-gulp.task('js', function() {
+gulp.task("babel", function () {
   return gulp.src(config.jsin)
-    .pipe(babel({ignore: 'gulpfile.babel.js'}))
     .pipe(concat(config.jsoutname))
+    .pipe(babel())
     .pipe(uglify())
     .pipe(gulp.dest(config.jsout));
 });
@@ -110,7 +109,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('build', function() {
-  sequence('clean', ['img','json','html', 'js', 'css']);
+  sequence('clean', ['img','json','html', 'babel', 'css']);
 });
 
 gulp.task('default', ['serve']);
